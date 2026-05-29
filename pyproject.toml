@@ -1,0 +1,39 @@
+[project]
+name = "safety-dashboard"
+version = "0.1.0"
+description = "EP05 — live attack-testing dashboard for the AgentVerse Safety Harness."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "explainpannu" }]
+license = { text = "MIT" }
+dependencies = [
+    "agentverse-safety",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "pydantic>=2.5",
+    "python-dotenv>=1.0",
+    "requests>=2.31",
+    "litellm>=1.50",
+]
+
+[project.optional-dependencies]
+observability = ["openlit>=1.0"]
+dev = ["pytest>=8.0", "httpx>=0.27"]
+
+[project.scripts]
+safety-dashboard = "safety_dashboard.main:run_api"
+safety-dashboard-smoke = "safety_dashboard.main:smoke"
+
+[project.urls]
+Homepage = "https://github.com/sasilab/multi-agent"
+Repository = "https://github.com/sasilab/multi-agent"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/safety_dashboard"]
+
+[tool.uv.sources]
+agentverse-safety = { path = "../agentverse_safety", editable = true }
